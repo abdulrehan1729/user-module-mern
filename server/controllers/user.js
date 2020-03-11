@@ -1,19 +1,20 @@
 const User = require("../db/models/user");
 
 module.exports = {
+  // Registeration for new user
   registerUser(req, res) {
     const { firstName, lastName, email, phoneNumber, password } = req.body;
 
-    User.find(
+    User.findOne(
       { $or: [{ phone_number: phoneNumber }, { email: email }] },
       (error, user) => {
-        console.log("hey");
         if (error) {
           console.log(`error occured: ${error}`);
           res.json({ error: error });
         } else if (user) {
           res.json({
-            msg: "Sorry user is already exist please try with different number"
+            msg:
+              "Sorry user is already exist please try with different phoen number or email address"
           });
         } else {
           const newUser = new User({
@@ -35,6 +36,8 @@ module.exports = {
         }
       }
     );
-    console.log("end");
-  }
+  },
+
+  //User Login
+  userLogin(req, res, next) {}
 };

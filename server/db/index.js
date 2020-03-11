@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const MongoClient = require("mongodb").MongoClient;
 mongoose.Promise = global.Promise;
 
 //your local database url
