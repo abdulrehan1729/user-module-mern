@@ -121,8 +121,5 @@ module.exports = {
         });
       }
     });
-  },
-
-  //User Login
-  userLogin(req, res, next) {}
+  }
 };

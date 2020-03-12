@@ -5,6 +5,7 @@ const routes = require("./router/router");
 const session = require("express-session");
 const dbConnection = require("./db");
 const MongoStore = require("connect-mongo")(session);
+const passport = require("passport");
 
 //Port
 const port = process.env.PORT || 4003;
@@ -20,12 +21,16 @@ app.use(bodyParser.json());
 //Sessions
 app.use(
   session({
-    secret: "535510n-53cr37", //pick a random string to make the hash that is generated secure
+    secret: "535510n-53cr37",
     store: new MongoStore({ mongooseConnection: dbConnection }),
-    resave: false, //required
-    saveUninitialized: false //required
+    resave: false,
+    saveUninitialized: false
   })
 );
+
+//Passport
+app.use(passport.initialize());
+app.use(passport.session());
 
 //Router
 app.use("/user", routes);
