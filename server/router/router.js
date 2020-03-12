@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const userController = require("../controllers/user");
 
-router.post("/register", (req, res) => {
+router.post("/register/:token", (req, res) => {
   userController.registerUser(req, res);
 });
 
