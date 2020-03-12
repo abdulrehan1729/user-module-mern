@@ -121,5 +121,24 @@ module.exports = {
         });
       }
     });
+  },
+
+  userHome(req, res, next) {
+    console.log(req.user);
+    if (req.user) {
+      res.json({ user: req.user });
+    } else {
+      res.json({ user: null });
+    }
+  },
+
+  userUpdate(req, res) {},
+  userLogout(req, res) {
+    if (req.user) {
+      req.logout();
+      res.send({ msg: "logging out" });
+    } else {
+      res.send({ msg: "no user to log out" });
+    }
   }
 };
