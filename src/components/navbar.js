@@ -19,7 +19,7 @@ class Navbar extends Component {
         if (response.status === 200) {
           this.props.updateUser({
             loggedIn: false,
-            username: null
+            user: null
           });
         }
       })
@@ -45,6 +45,9 @@ class Navbar extends Component {
                   onClick={this.logout}
                 >
                   <span className="text-secondary">logout</span>
+                </Link>
+                <Link to="/update-user" className="btn btn-link text-secondary">
+                  <span className="text-secondary">update-details</span>
                 </Link>
               </section>
             ) : (

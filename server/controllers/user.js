@@ -131,7 +131,25 @@ module.exports = {
     }
   },
 
-  userUpdate(req, res) {},
+  userUpdate(req, res) {
+    const { firstName, lastName } = req.body;
+    let body = {};
+    if (lastName === "") {
+      body.first_name = firstName;
+    } else {
+      body.first_name = firstName;
+      body.last_name = lastName;
+    }
+    User.findByIdAndUpdate(req.user.id, body, { new: true }, (err, user) => {
+      if (err) {
+        console.log(err);
+        res.json({ error: err });
+      }
+      console.log(user);
+      return res.json(user);
+    });
+  },
+
   userLogout(req, res) {
     if (req.user) {
       req.logout();

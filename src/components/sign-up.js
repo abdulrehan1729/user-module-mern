@@ -131,7 +131,6 @@ class Signup extends Component {
                   type="text"
                   id="lastName"
                   name="lastName"
-                  required="required"
                   placeholder="Last Name"
                   value={this.state.lastName}
                   onChange={this.handleChange}

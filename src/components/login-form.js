@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
+import PhoneInput from "react-phone-input-2";
 
 class LoginForm extends Component {
   constructor() {
@@ -31,13 +32,11 @@ class LoginForm extends Component {
       })
       .then(response => {
         console.log("login response: ");
-        console.log(response);
         if (response.status === 200) {
-          console.log(response);
           // update App.js state
           this.props.updateUser({
             loggedIn: true,
-            username: response.data.phone_number
+            user: response.data
           });
           // update the state to redirect to home
           this.setState({
@@ -66,14 +65,19 @@ class LoginForm extends Component {
                 </label>
               </div>
               <div className="col-3 col-mr-auto">
-                <input
-                  className="form-input"
-                  type="text"
-                  id="phoneNumber"
-                  name="phoneNumber"
+                <PhoneInput
+                  inputClass="form-input"
                   placeholder="Phone Number"
+                  country={"in"}
+                  inputProps={{
+                    type: "tel",
+                    id: "phoneNumber",
+                    name: "phoneNumber",
+                    renderStringAsFlag: "india",
+                    required: "required"
+                  }}
                   value={this.state.phoneNumber}
-                  onChange={this.handleChange}
+                  onChange={phoneNumber => this.setState({ phoneNumber })}
                 />
               </div>
             </div>
