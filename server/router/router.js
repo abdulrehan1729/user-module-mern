@@ -6,16 +6,15 @@ router.post("/verify-email", (req, res) => {
   userController.verifyEmail(req, res);
 });
 
-router.post("/register/:token", (req, res) => {
+router.post("/register", (req, res) => {
   userController.registerUser(req, res);
 });
 
 router.post("/login", passport.authenticate("local"), (req, res) => {
   console.log("logged in", req.user.first_name);
-  var userInfo = {
-    username: req.user.first_name
-  };
-  res.send(userInfo);
+
+  console.log(req.user);
+  res.send(req.user);
 });
 
 router.get("/", (req, res, next) => {

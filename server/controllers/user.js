@@ -6,8 +6,7 @@ const nodemailer = require("nodemailer");
 module.exports = {
   // Registeration for new user
   registerUser(req, res) {
-    const { firstName, lastName, phoneNumber, password } = req.body;
-    const { token } = req.params;
+    const { firstName, lastName, phoneNumber, password, token } = req.body;
 
     Token.findOne(
       {
@@ -87,7 +86,7 @@ module.exports = {
           }
         });
 
-        const link = `http://localhost:4003/user/register/${token}`;
+        const link = `http://localhost:3000/register/${token}`;
 
         const transporter = nodemailer.createTransport({
           service: "gmail",
@@ -116,7 +115,7 @@ module.exports = {
             res.json({ error: err });
           } else {
             console.log("sent");
-            res.send(mailOpts);
+            res.json({ msg: "Email has been sent to your email address" });
           }
         });
       }
